@@ -1,0 +1,13 @@
+
+# Specific files
+.DS_Store
+.vsconfig
+
+# Extensions
+*.sln
+
+# Folders
+/Library
+/Logs
+/Temp
+/UserSettings
