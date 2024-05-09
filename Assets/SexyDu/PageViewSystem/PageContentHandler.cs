@@ -1,3 +1,5 @@
+#define USE_IMONOPAGE
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -53,7 +55,11 @@ namespace SexyDu.PageViewSystem
                 InactiveLastestPageView();
 
                 content.SetRemoveReceiverInterface(this);
+#if USE_IMONOPAGE
+                content.LoadMonoPage();
+#else
                 content.LoadPageView();
+#endif
 
                 contents.Add(content);
 
@@ -109,30 +115,51 @@ namespace SexyDu.PageViewSystem
         #region Handling PageView
         private void ActiveLastestPageView()
         {
+#if USE_IMONOPAGE
+            if (Count > 0)
+                contents[lastIndex].SetMonoPageActive(enable);
+#else
             if (Count > 0)
                 contents[lastIndex].SetPageViewActive(enable);
+#endif
+
         }
 
         private void InactiveLastestPageView()
         {
+#if USE_IMONOPAGE
+            if (Count > 0)
+                contents[lastIndex].SetMonoPageActive(false);
+#else
             if (Count > 0)
                 contents[lastIndex].SetPageViewActive(false);
+#endif
         }
 
         private void DestroyLegacyPageView()
         {
             int index = Count - 1 - MaxAlivePageViewCount;
 
+#if USE_IMONOPAGE
+            if (index >= 0)
+                contents[index].DestoryMonoPage();
+#else
             if (index >= 0)
                 contents[index].DestoryPageView();
+#endif
         }
 
         private void ReloadLagecyPageView()
         {
             int index = Count - MaxAlivePageViewCount;
 
+#if USE_IMONOPAGE
+            if (index >= 0 && !contents[index].HasMonoPage)
+                contents[index].LoadMonoPage(false);
+#else
             if (index >= 0 && !contents[index].HasPageView)
                 contents[index].LoadPageView(false);
+#endif
         }
         #endregion
 

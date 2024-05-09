@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace SexyDu.PageViewSystem
 {
-    public abstract class MonoPageView : MonoBehaviour
+    public abstract class MonoPageView : MonoBehaviour, IMonoPage
     {
         /// <summary>
         /// 초기 설정 함수
         /// </summary>
-        public abstract MonoPageView Initialize(object arg = null);
+        public abstract IMonoPage Initialize(object arg = null);
 
         /// <summary>
         /// 클리어(메모리 해제 등) 함수
