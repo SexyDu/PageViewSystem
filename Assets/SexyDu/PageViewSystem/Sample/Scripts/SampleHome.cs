@@ -1,0 +1,43 @@
+using UnityEngine;
+
+namespace SexyDu.PageViewSystem.Sample
+{
+    public class SampleHome : MonoBehaviour, IObserverContentsCount
+    {
+        private MonoPageRoot PageRoot { get { return PageViewLoader.Instance.Current; } }
+
+        public void Initialize()
+        {
+            PageRoot.ContentsHandler.Subscribe(this);
+
+            SetActive(PageRoot.ContentsHandler.Count);
+        }
+
+        private void OnDestroy()
+        {
+            PageRoot.ContentsHandler.Unsubscribe(this);
+        }
+
+        public void OnContentsCountChanged(int count)
+        {
+            Debug.LogFormat("활성화 MonoPage 수 : {0}", count);
+
+            SetActive(count);
+        }
+
+        #region ObjectCaches
+        [SerializeField] private GameObject gameObjectCache;
+        private GameObject GameObjectCache { get { return gameObjectCache; } }
+
+        private void SetActive(bool active)
+        {
+            GameObjectCache.SetActive(active);
+        }
+
+        private void SetActive(int pageCount)
+        {
+            SetActive(pageCount.Equals(0));
+        }
+        #endregion
+    }
+}

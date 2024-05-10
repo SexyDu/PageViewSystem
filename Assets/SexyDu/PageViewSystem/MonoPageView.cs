@@ -32,10 +32,10 @@ namespace SexyDu.PageViewSystem
         /// </summary>
         public virtual void Close()
         {
-            Destroy();
-
             if (OnClosed != null)
                 OnClosed();
+            else
+                Destroy();
         }
 
         #region ObjectCaches
