@@ -2,6 +2,9 @@ using System;
 
 namespace SexyDu.PageViewSystem
 {
+    /// <summary>
+    /// PageView 관리 싱글톤
+    /// </summary>
     public sealed class PageViewLoader
     {
         #region Singleton
@@ -12,6 +15,9 @@ namespace SexyDu.PageViewSystem
         private MonoPageRoot current = null;
         public MonoPageRoot Current { get { return current; } }
 
+        /// <summary>
+        /// 현재 관리되는 PageRoot 설정
+        /// </summary>
         public void SetPageRoot(MonoPageRoot pageRoot)
         {
             if (current != null)
@@ -23,6 +29,9 @@ namespace SexyDu.PageViewSystem
             current = pageRoot;
         }
 
+        /// <summary>
+        /// 현재 관리되는 PageRoot 해제
+        /// </summary>
         public void ReleasePageRoot(MonoPageRoot pageRoot)
         {
             if (current.Equals(pageRoot))

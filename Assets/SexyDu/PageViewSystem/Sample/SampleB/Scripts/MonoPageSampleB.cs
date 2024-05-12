@@ -9,6 +9,7 @@ namespace SexyDu.PageViewSystem.Sample
 
         public override IMonoPage Initialize(object arg = null)
         {
+            // InitializeArgument 사용 예시
             if (arg is InitializeArgument)
                 Initialize(arg as InitializeArgument);
             else if (arg is int)
@@ -54,6 +55,9 @@ namespace SexyDu.PageViewSystem.Sample
         }
 
         #region InitializeArgument
+        /// <summary>
+        /// MonoPageSampleB 초기설정 사용 데이터 클래스
+        /// </summary>
         public class InitializeArgument : InitializeArgumentBase
         {
             private readonly object someObject;

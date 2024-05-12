@@ -1,7 +1,7 @@
 namespace SexyDu.PageViewSystem
 {
     /// <summary>
-    /// PageView 구성에 필요한 데이터 기반 클래스
+    /// MonoPage 구성에 필요한 데이터 기반 클래스
     /// </summary>
     public class InitializeArgumentBase
     {

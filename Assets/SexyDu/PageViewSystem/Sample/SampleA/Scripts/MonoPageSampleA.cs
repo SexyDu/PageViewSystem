@@ -9,6 +9,7 @@ namespace SexyDu.PageViewSystem.Sample
 
         public override IMonoPage Initialize(object arg = null)
         {
+            /// arg 인자 관리
             if (arg is int)
                 Initialize((int)arg);
             else

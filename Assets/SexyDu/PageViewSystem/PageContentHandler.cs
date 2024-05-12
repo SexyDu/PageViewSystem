@@ -8,13 +8,17 @@ namespace SexyDu.PageViewSystem
     /// <summary>
     /// PageContent 스택 기반 리스트 관리
     /// </summary>
-    public class PageContentsHandler : IPageContentRemoveReceiver, ISubjectContentsCount
+    public partial class PageContentsHandler : IPageContentRemoveReceiver
     {
         // 한번에 살아있을 수 있는 최대 PageView 수
         private const int MaxAlivePageViewCount = 5;
 
         // 생성된 PageContent 리스트
         private List<PageContent> contents = new List<PageContent>();
+
+        // 생성된 PageContent 수
+        public int Count { get { return contents.Count; } }
+
         // 리스트의 마지막 인덱스
         private int lastIndex { get { return Count - 1; } }
 
@@ -29,30 +33,7 @@ namespace SexyDu.PageViewSystem
                     return contents[lastIndex];
             }
         }
-
-        #region Subject - ISubjectContentsCount
-        private List<IObserverContentsCount> observers = new List<IObserverContentsCount>();
-
-        public int Count { get { return contents.Count; } }
-        public void Subscribe(IObserverContentsCount observer)
-        {
-            if (!observers.Contains(observer))
-                observers.Add(observer);
-        }
-        public void Unsubscribe(IObserverContentsCount observer)
-        {
-            observers.Remove(observer);
-        }
-
-        private void NotifyContentsCount()
-        {
-            for (int i = 0; i < observers.Count; i++)
-            {
-                observers[i].OnContentsCountChanged(Count);
-            }
-        }
-        #endregion
-
+        
         /// <summary>
         /// PageContent 추가
         /// </summary>

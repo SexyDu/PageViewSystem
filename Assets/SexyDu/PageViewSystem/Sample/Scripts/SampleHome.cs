@@ -8,6 +8,7 @@ namespace SexyDu.PageViewSystem.Sample
 
         public void Initialize()
         {
+            // 옵저버 등록
             PageRoot.ContentsHandler.Subscribe(this);
 
             SetActive(PageRoot.ContentsHandler.Count);
@@ -15,6 +16,7 @@ namespace SexyDu.PageViewSystem.Sample
 
         private void OnDestroy()
         {
+            // 옵저버 해제
             PageRoot.ContentsHandler.Unsubscribe(this);
         }
 
