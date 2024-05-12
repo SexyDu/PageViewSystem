@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace SexyDu.PageViewSystem
 {
+    /// <summary>
+    /// MonoPage 관리 루트 클래스
+    /// </summary>
     public abstract class MonoPageRoot : MonoBehaviour
     {
         [SerializeField] private Transform pageViewParent;

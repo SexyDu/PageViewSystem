@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace SexyDu.PageViewSystem
 {
+    /// <summary>
+    /// MonoPage 컨텐츠 로드 관리 클래스
+    /// </summary>
     public class PageContent : IDisposable
     {
         public void Dispose()
@@ -38,6 +41,9 @@ namespace SexyDu.PageViewSystem
         private IMonoPage monoPage = null; // 해당 컨텐츠의 MonoPageView
         public bool HasMonoPage { get { return monoPage != null; } } // PageView 존재 여부
 
+        /// <summary>
+        /// 생성된 IMonoPage 설정
+        /// </summary>
         private void SetMonoPage(IMonoPage monoPage)
         {
             this.monoPage = monoPage;
@@ -46,12 +52,18 @@ namespace SexyDu.PageViewSystem
             this.monoPage.Initialize(arg).OnClosed = OnMonoPageClosed;
         }
 
+        /// <summary>
+        /// MonoPage 활성화 설정
+        /// </summary>
         public void SetMonoPageActive(bool active)
         {
             if (HasMonoPage)
                 monoPage.SetActive(active);
         }
 
+        /// <summary>
+        /// MonoPage 종료 이벤트 처리
+        /// </summary>
         private void OnMonoPageClosed()
         {
             // 제거 요청 인터페이스가 없는 경우
@@ -62,6 +74,10 @@ namespace SexyDu.PageViewSystem
                 removeReceiver.Remove(this);
         }
 
+        /// <summary>
+        /// MonoPage 로드
+        /// </summary>
+        /// <param name="active">초기 활성화 상태</param>
         public void LoadMonoPage(bool active = true)
         {
             GameObject source = Resources.Load<GameObject>(resourcesPath);
@@ -94,6 +110,9 @@ namespace SexyDu.PageViewSystem
             }
         }
 
+        /// <summary>
+        /// MonoPage 파괴
+        /// </summary>
         public void DestoryMonoPage()
         {
             if (monoPage != null)
