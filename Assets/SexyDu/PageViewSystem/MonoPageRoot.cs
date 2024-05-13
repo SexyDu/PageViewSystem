@@ -11,8 +11,24 @@ namespace SexyDu.PageViewSystem
         [SerializeField] private Transform pageViewParent;
 
         // PageContent 관리
-        private PageContentsHandler contentsHandler = new PageContentsHandler();
+        private PageContentsHandler contentsHandler = null;
         public PageContentsHandler ContentsHandler { get { return contentsHandler; } }
+
+        /// <summary>
+        /// 초기 설정
+        /// </summary>
+        public virtual void Initialize()
+        {
+            if (contentsHandler == null)
+            {
+                // PageContentsHandler 생성
+                contentsHandler = new PageContentsHandler();
+            }
+            else
+            {
+                Debug.LogWarning("이미 PageContentsHandler가 생성되어 있는데 Initialize가 호출되었습니다.");
+            }
+        }
 
         /// <summary>
         /// 메인 PageRoot 등록

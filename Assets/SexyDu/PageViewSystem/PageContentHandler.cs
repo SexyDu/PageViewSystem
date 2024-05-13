@@ -11,7 +11,17 @@ namespace SexyDu.PageViewSystem
     public partial class PageContentsHandler : IPageContentRemoveReceiver
     {
         // 한번에 살아있을 수 있는 최대 PageView 수
-        private const int MaxAlivePageViewCount = 5;
+        private readonly int maxAlivePageViewCount = 5;
+
+        public PageContentsHandler()
+        {
+
+        }
+
+        public PageContentsHandler(int maxAlivePageViewCount)
+        {
+            this.maxAlivePageViewCount = maxAlivePageViewCount;
+        }
 
         // 생성된 PageContent 리스트
         private List<PageContent> contents = new List<PageContent>();
@@ -159,7 +169,7 @@ namespace SexyDu.PageViewSystem
         /// </summary>
         private void DestroyLegacyPageView()
         {
-            int index = Count - 1 - MaxAlivePageViewCount;
+            int index = Count - 1 - maxAlivePageViewCount;
 
 #if USE_IMONOPAGE
             if (index >= 0)
@@ -175,7 +185,7 @@ namespace SexyDu.PageViewSystem
         /// </summary>
         private void ReloadLagecyPageView()
         {
-            int index = Count - MaxAlivePageViewCount;
+            int index = Count - maxAlivePageViewCount;
 
 #if USE_IMONOPAGE
             if (index >= 0 && !contents[index].HasMonoPage)

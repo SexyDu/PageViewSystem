@@ -6,6 +6,8 @@ namespace SexyDu.PageViewSystem.Sample
     {
         private void Awake()
         {
+            Initialize();
+
             RegisterPageRoot();
 
             home.Initialize();
