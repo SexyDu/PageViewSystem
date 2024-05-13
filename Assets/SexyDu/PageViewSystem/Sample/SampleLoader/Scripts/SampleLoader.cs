@@ -34,11 +34,13 @@ namespace SexyDu.PageViewSystem.Sample
 
         public void OnClickSampleA()
         {
-            PageRoot.Add(MonoPageSampleA.ResourcePath, this.depth + 1);
+            // int 형 argument로 SampleA 추가(로드)
+            PageRoot.Add(MonoPageSampleA.ResourcePath, depth + 1);
         }
 
         public void OnClickSampleB()
         {
+            // class 형 argument로 SampleB 추가(로드)
             PageRoot.Add(MonoPageSampleB.ResourcePath, new MonoPageSampleB.InitializeArgument(null, depth + 1, currentName));
         }
     }
